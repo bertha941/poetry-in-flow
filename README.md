@@ -1,19 +1,25 @@
-# 诗随水行 | Poetry in Flow
+# 诗随水行｜Poetry in Flow（路线体验初版）
 
-A student concept prototype for a bilingual Chu Ci cultural tourism journey.
+这是楚辞水脉主题的**学生概念网站**。包含中英双语、六枚诗印与兑换模拟，并新增三种长短线路（半日／2天1晚／4–5天）、香草径与问天径两种体验模块。
 
-## 中文说明
+## 如何使用
 
-- 点击页面右上方的 `EN` 可切换英文，点击 `中文` 返回中文。
-- 六个章节支持诗印模拟收集、AR视觉预览、双语导览以及奖励兑换演示。
-- 本地浏览器保存收集进度，切换语言不会重置诗印。
-- AR并非真正的景物识别；奖励均为模拟内容。
-- 这是课程概念原型，不是景区官方产品。
+打开 `index.html`，点击首页的路线卡片，或导航中的「路线 / Journeys」。页面可切换中英语言；浏览器里原先集到的诗印通常会继续保留（使用相同来源网址与浏览器）。
 
-## GitHub Pages
+## 上传 GitHub Pages
 
-将根目录 `index.html` 和 `.nojekyll` 上传至公开仓库。在 **Settings → Pages → Build and deployment** 下选择 **Deploy from a branch**, branch 为 `main`, folder 为 `/(root)`，保存并等待部署。
+将解压后的下列 **五个文件** 直接上传至仓库 `main` 分支的根目录（不要另套一层文件夹）：
+- `index.html`
+- `herbs.webp`
+- `mountains.webp`
+- `rivers.webp`
+- `README.md`
 
-## English
+原仓库已有 index.html 和 README.md：上传同名新版用于替换。到 Settings → Pages 确认 `main` / `(root)`，等待页面自动更新即可。
 
-Open `index.html` in your browser or publish it through GitHub Pages. Use the upper-right language switch to switch between Chinese and English. All collection and reward features are simulated for teaching purposes.
+## 注意
+
+- 图片仅用作概念插图，不代表真实景点、合作商家或活动开放情况。
+- 线路、AR、兑换、问天互动是概念原型，不是现成旅游产品。
+- 不接入定位、预约、支付或个人信息服务；诗印仅保存于当前浏览器。
+- 诗歌英译目前是旅游场景工作译文，非直接引用的正式出版译文。
