@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#123a3e" />
+<meta name="description" content="诗随水行：楚辞水脉AR沉浸式文旅项目交互原型。沿山水收集六枚诗印，解锁诗卷与纪念礼遇。" />
+<title>诗随水行 · 楚辞水脉互动体验</title>
+<style>
+:root{--ink:#17363b;--text:#213b40;--sub:#6e7c78;--teal:#1c625e;--teal2:#357f78;--jade:#dbeae1;--paper:#f7f5ef;--cream:#fffdf7;--line:#dedfd6;--gold:#b58b50;--shadow:0 16px 50px rgba(33,68,64,.075)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;font-size:15px;line-height:1.65}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #75b7a9;outline-offset:3px}a{color:inherit;text-decoration:none}body.modal-open{overflow:hidden}::selection{background:#b4dace}svg{display:block}
+.wrap{width:min(1100px,calc(100% - 40px));margin:0 auto}
+.topbar{height:74px;background:rgba(247,245,239,.94);backdrop-filter:blur(16px);position:sticky;top:0;z-index:12;border-bottom:1px solid rgba(24,62,61,.1)}.topbar .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:11px;white-space:nowrap}.brand-mark{height:35px;width:35px;background:var(--ink);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:22px;font-family:serif}.brand-main{font-size:20px;font-family:serif;font-weight:700;letter-spacing:2px}.brand-small{display:block;font-size:9px;letter-spacing:2px;color:#82918b;margin-top:-5px}.nav{display:flex;gap:6px;align-items:center;background:#ecefe8;padding:4px;border-radius:40px}.nav button{border:0;background:transparent;color:#677d76;font-weight:600;font-size:13px;padding:8px 17px;border-radius:22px;transition:.2s}.nav button.on{background:#fff;color:#164c48;box-shadow:0 1px 8px #0c3a3510}.topright{display:flex;align-items:center;gap:8px}.pill{border:1px solid #cbdcd1;padding:6px 11px;font-size:12px;white-space:nowrap;border-radius:25px;color:#37685f;background:#f6faf5}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#64a58d;margin-right:5px;vertical-align:middle}.reset-btn{border:0;background:transparent;color:#85918d;font-size:12px;padding:9px}
+main{padding:26px 0 80px}.hero{position:relative;min-height:363px;background:linear-gradient(130deg,#123e43 0%,#15524d 55%,#236f65 100%);overflow:hidden;border-radius:22px;color:#fff;display:grid;grid-template-columns:1.2fr .8fr;box-shadow:0 20px 48px #163e3a22}.hero:before{content:"";position:absolute;width:590px;height:590px;border:1px solid #ffffff1a;border-radius:48% 52% 57% 43%;right:-155px;top:-210px;transform:rotate(22deg)}.hero:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 95% 14%,#a9c9ba22 0%,transparent 27%)}.hero-copy{padding:52px 36px 45px 52px;position:relative;z-index:1}.overline{font-size:11px;letter-spacing:3px;color:#bcd7c7;font-weight:600;margin-bottom:16px}.hero h1{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-weight:650;font-size:clamp(42px,5.5vw,70px);line-height:1.18;letter-spacing:9px;margin:0 0 16px}.hero-sub{font-size:18px;color:#e9f2e7;letter-spacing:3px;margin:0 0 19px}.hero-desc{max-width:410px;color:#bad2cb;font-size:13px;line-height:2}.hero-actions{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 19px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .2s,box-shadow .2s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:#d4b079;color:#213a36}.btn.primary:hover{background:#e5c58e}.btn.light{background:#eff7ef;color:#1d5d53}.btn.dark{background:#1e5955;color:white}.btn.ghost{background:#ffffff15;border:1px solid #ffffff55;color:#eef5ee}.btn.border{background:#fff;border:1px solid #cddbd2;color:#2e6458}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.hero-visual{position:relative;overflow:hidden}.stream-art{width:100%;height:100%;position:absolute;right:0;top:0;opacity:.92}.small-chip{background:#ffffff17;border:1px solid #ffffff30;color:#e3f2ed;border-radius:15px;padding:11px 15px;position:absolute;right:37px;bottom:33px;z-index:2;min-width:190px;backdrop-filter:blur(10px)}.small-chip .big{font-size:21px;font-weight:700;line-height:1.1;color:#fff}.small-chip .caption{color:#b7d6cc;font-size:11px}
+.sections{padding:36px 0 0}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:0 0 20px}.eyebrow{letter-spacing:2px;font-weight:700;color:var(--gold);font-size:10px;text-transform:uppercase}.section-heading h2{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:29px;margin:5px 0 3px;font-weight:650;letter-spacing:2px}.section-heading p{font-size:13px;color:var(--sub);margin:0}.progress-card{background:white;border:1px solid var(--line);padding:9px 15px;border-radius:11px;min-width:166px}.progress-card small{display:block;color:var(--sub);font-size:11px}.progress-card b{font-size:21px;line-height:1.3}.progress-line{height:5px;background:#e9efeb;border-radius:20px;overflow:hidden;margin-top:7px}.progress-line>div{height:100%;background:linear-gradient(90deg,#5caa99,#c6b078);transition:width .4s ease;border-radius:20px}
+.intro-row{display:grid;grid-template-columns:1.4fr .6fr;gap:17px;margin:0 0 22px}.intro-note{background:#e6eee6;padding:18px 23px;border:1px solid #d3e3d9;border-radius:13px;display:flex;align-items:center;gap:18px}.intro-note .drop{font-size:25px;width:49px;height:49px;display:grid;place-items:center;background:#f8fffa;border-radius:50%;color:#316c64;flex-shrink:0}.intro-note strong{display:block;font-size:14px;margin-bottom:3px}.intro-note p{font-size:12px;color:#607e72;margin:0}.intro-stats{background:#f0ebe3;border-radius:13px;border:1px solid #e7dccc;display:flex;align-items:center;justify-content:center;padding:15px;gap:20px}.intro-stats .n{font-size:26px;color:#786347;font-weight:600;line-height:1}.intro-stats .txt{font-size:11px;color:#8b7d68}
+.cardgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.site-card{background:var(--cream);border:1px solid #e2e5dc;border-radius:15px;overflow:hidden;box-shadow:0 2px 3px #1c3c3410;display:flex;flex-direction:column;min-height:287px;transition:transform .16s,box-shadow .16s}.site-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.card-image{height:108px;background:var(--bg);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.card-image:after{content:"";width:150%;height:110px;border:2px solid #ffffff66;border-radius:50%;transform:rotate(-17deg);position:absolute;left:-10%;bottom:-86px}.card-image .glyph{font-family:Georgia,"Songti SC",serif;color:#ffffffd9;font-size:54px;line-height:1;filter:drop-shadow(0 3px 12px #00000015)}.card-image .num{font-size:10px;letter-spacing:2px;position:absolute;top:13px;left:16px;color:#ffffffee}.state-tag{position:absolute;right:13px;top:12px;background:#ffffffeb;color:#45645a;padding:4px 9px;border-radius:20px;font-size:10px;font-weight:700}.state-tag.done{background:#e0f3e5;color:#20734d}.card-body{padding:18px 18px 14px;display:flex;flex-direction:column;flex:1}.card-topline{display:flex;justify-content:space-between;gap:6px;align-items:center}.card-region{font-size:10px;letter-spacing:1px;color:#9a8b6e}.card-name{font-family:"Songti SC","STSong",serif;font-size:21px;font-weight:650;color:#243e3c;margin:3px 0 5px}.card-verse{font-size:12px;color:#667c73;line-height:1.65;flex:1}.card-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ebede5;margin-top:15px;padding-top:12px;color:#53675f;font-size:12px}.card-bottom .arrow{font-size:17px;color:#a17c4e}.core{background:#e8eee7;color:#4c796b;font-size:10px;padding:2px 7px;border-radius:5px}.branch{background:#f3e9dc;color:#97734f}
+.tabpage{display:none}.tabpage.active{display:block;animation:rise .3s ease}@keyframes rise{from{opacity:.2;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.scroll-stage{margin-top:28px;border:1px solid #dfdfd3;background:#fffdf7;border-radius:16px;padding:25px 27px}.scroll-head{font-family:"Songti SC",serif;font-size:21px;margin:0 0 7px}.scroll-stage>p{margin:0;color:var(--sub);font-size:12px}.journey{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:24px;position:relative}.journey .journey-step{position:relative;text-align:center;padding-top:28px}.journey .journey-step:before{content:"";position:absolute;top:10px;left:-50%;width:100%;height:2px;background:#e4e9e4;z-index:0}.journey .journey-step:first-child:before{display:none}.journey-step .circle{position:absolute;top:1px;left:50%;transform:translateX(-50%);width:19px;height:19px;z-index:2;border-radius:50%;background:#fff;border:2px solid #b7cfc3}.journey-step.done .circle{background:#508a78;border-color:#508a78;box-shadow:inset 0 0 0 3px #fff}.journey .journey-step b{font-size:12px;display:block}.journey .journey-step span{font-size:10px;color:var(--sub)}
+.rewards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.reward-box{border-radius:18px;overflow:hidden;border:1px solid #e3e1d5;background:#fffef9;box-shadow:var(--shadow)}.reward-graphic{min-height:198px;display:grid;place-items:center;background:#d5e6db;position:relative;overflow:hidden}.reward-graphic.sand{background:#eee1ce}.postcard{width:213px;height:131px;background:#fffdf6;box-shadow:0 10px 20px #203d3329;border:6px solid white;transform:rotate(-7deg);position:relative;overflow:hidden}.postcard svg{width:100%;height:100%}.postcard .postmark{position:absolute;top:13px;right:14px;border:2px solid #8e907e;border-radius:50%;width:58px;height:58px;display:grid;place-items:center;color:#7c816e;font-family:serif;font-size:11px;text-align:center;line-height:1.25;transform:rotate(12deg);opacity:.85}.bookmark{height:160px;width:79px;background:linear-gradient(145deg,#e6eee2b8,#a2d0bf77,#e5e9dfcc);box-shadow:0 15px 25px #3d5b5c33;border:1px solid #ffffffde;transform:rotate(12deg);border-radius:6px 6px 21px 21px;position:relative;display:flex;justify-content:center;align-items:center}.bookmark:before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;top:11px;border:1px solid #576f60}.bookmark .vertical{writing-mode:vertical-rl;color:#2e685f;letter-spacing:6px;font-family:"STSong",serif;font-size:21px;font-weight:bold}.reward-content{padding:23px}.reward-content .reward-label{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:2px}.reward-content h3{font-family:"Songti SC",serif;font-size:21px;margin:8px 0}.reward-content p{font-size:12px;color:var(--sub);min-height:43px;margin:4px 0 17px}.reward-content .btn{width:100%;justify-content:center}.little-note{font-size:11px;color:var(--sub);margin-top:17px}
+.mapwrap{border:1px solid var(--line);border-radius:18px;background:#fcfdf9;padding:19px 18px 10px;overflow:hidden}.map-legend{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:5px;color:#6c827e;font-size:11px}.key{width:10px;height:10px;display:inline-block;border-radius:50%;background:#397e7c;margin-right:3px}.map-title{font-weight:650;font-size:17px;color:#2d4949}.map-schematic{width:100%;height:auto;max-height:500px}.map-prompt{color:#7d8983;font-size:11px;line-height:1.7;margin:0 6px 12px}.route-how{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:18px}.route-how .mini{padding:18px;border:1px solid var(--line);background:#fffdf8;border-radius:13px}.route-how b{font-size:13px}.route-how p{font-size:12px;color:var(--sub);margin:7px 0 0}
+.diary-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.poem-sheet{background:#faf8f0;border:1px solid #ddd8c6;position:relative;padding:26px 28px;border-radius:16px;min-height:205px}.poem-sheet:before{content:"";position:absolute;inset:9px;border:1px solid #e5decc;border-radius:11px;pointer-events:none}.diary-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.diary-item{padding:15px;background:#ffffffbd;border:1px solid #e5e1d4;border-radius:10px;display:flex;align-items:center;gap:13px;min-height:86px}.diary-item .stamp{height:42px;width:42px;flex-shrink:0;border:2px solid #66988a;color:#316d61;border-radius:50%;display:grid;place-items:center;font-family:serif;font-size:23px}.diary-item .stamp.off{border-style:dotted;color:#adbdb3;border-color:#cbd8d0}.diary-item strong{font-size:13px}.diary-item p{font-size:11px;color:var(--sub);margin:2px 0 0}.diary-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:10px}
+.notice{font-size:11px;color:#9a9080;background:#f1eee5;border-radius:9px;padding:12px 15px;margin-top:18px}
+.footer{border-top:1px solid var(--line);padding:28px 0 40px;margin-top:45px;display:flex;justify-content:space-between;gap:20px;color:#809087;font-size:11px}.footer b{font-family:serif;font-size:15px;color:#4c726b}
+.modal{position:fixed;inset:0;background:#0e302ecb;z-index:50;display:none;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(7px)}.modal.open{display:flex}.modal-dialog{background:#fffcf4;width:min(700px,100%);max-height:min(880px,93dvh);overflow:auto;border-radius:20px;box-shadow:0 22px 76px #0005;position:relative}.modal-close{position:sticky;top:11px;float:right;z-index:8;margin:11px 11px -55px 0;border:1px solid #dfe7df;border-radius:50%;width:32px;height:32px;background:#fff;color:#576c67;font-size:21px;display:grid;place-items:center;line-height:1}.modal-inside{padding:31px}.modal-label{letter-spacing:2px;font-size:10px;font-weight:800;color:#8c916b}.modal-inside h2{font-family:"Songti SC",serif;font-size:29px;color:#153f3b;margin:7px 0 6px}.place{color:#879184;font-size:13px;margin:0 0 18px}.verse-block{font-family:"Songti SC",serif;font-size:19px;color:#294f45;line-height:1.75;border-left:3px solid #bba070;padding:2px 0 2px 17px;margin:18px 0}.translation{font-size:12px;color:#72807a;font-style:italic;line-height:1.7;margin:12px 0}.culture{background:#eff4ec;padding:15px;border-radius:11px;color:#486d5c;font-size:12px;line-height:1.9}.modal-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.ar-scene{height:262px;border-radius:14px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 90%,#83b9a966 0%,transparent 50%),linear-gradient(160deg,#203b47,#2c615b 68%,#648477);display:flex;align-items:center;justify-content:center;margin:17px 0}.ar-scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:.8}.ar-scene:before{content:"";position:absolute;inset:15px;border:1px solid #d7eee65e;border-radius:12px;z-index:1;pointer-events:none}.scanline{position:absolute;left:10%;right:10%;height:1px;background:#d9ffedac;top:14%;animation:scan 4s linear infinite;box-shadow:0 0 20px 5px #74f2c53c;z-index:2}@keyframes scan{to{top:87%}}.ar-glyph{font-size:100px;color:#d5eac8;opacity:.92;z-index:3;text-shadow:0 0 18px #efffd9,0 0 45px #c5fce7aa;animation:float 3.3s ease-in-out infinite;font-family:"Songti SC",serif}@keyframes float{0%,100%{transform:translateY(5px) rotate(-3deg)}50%{transform:translateY(-11px) rotate(3deg)}}.ar-corner{position:absolute;left:21px;top:22px;z-index:3;font-size:11px;color:#efffec}.ar-bottom{position:absolute;bottom:22px;left:20px;right:20px;text-align:center;z-index:3;color:#f5fff9;font-size:12px;text-shadow:0 1px 5px #000}.ar-note{font-size:11px;color:#7b8a84;margin-top:9px}.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#143f3b;color:white;box-shadow:var(--shadow);border-radius:40px;padding:11px 18px;opacity:0;pointer-events:none;z-index:99;transition:all .2s;font-size:13px;white-space:nowrap}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.gift-claim{border:1px dashed #d4c5a5;background:#faf4e8;padding:22px;border-radius:13px;text-align:center}.gift-claim .code{font-family:monospace;background:white;border:1px solid #e0d4bb;padding:8px;border-radius:6px;color:#8a7042;display:inline-block;margin-top:11px;font-size:17px;letter-spacing:2px}.input-row{display:flex;gap:8px;margin:14px 0}.input-row input{border:1px solid #ccdcd3;border-radius:8px;padding:9px 12px;flex:1;min-width:0;background:#fff;color:#234b42}.empty-state{text-align:center;padding:35px;color:#81928b;font-size:13px}
+@media(max-width:820px){.nav button{padding:7px 11px}.topright .pill{display:none}.hero{grid-template-columns:1.1fr .9fr}.hero-copy{padding:43px 28px}.cardgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-row{grid-template-columns:1fr}.route-how{grid-template-columns:1fr}.hero h1{font-size:49px}.small-chip{right:13px}}
+@media(max-width:575px){.wrap{width:calc(100% - 26px)}.topbar{height:64px}.topbar .wrap{gap:7px}.brand{gap:7px}.brand-main{font-size:17px}.brand-mark{height:30px;width:30px;font-size:18px}.brand-small{font-size:8px;letter-spacing:1.5px}.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;border-radius:0;padding:8px 12px max(9px,env(safe-area-inset-bottom));box-shadow:0 -4px 20px #173b3722;background:#fff;justify-content:space-around;border-top:1px solid #e5e6da}.nav button{padding:6px 13px;font-size:12px}.reset-btn{font-size:11px}.hero{min-height:414px;grid-template-columns:1fr}.hero-copy{padding:40px 29px;z-index:2}.hero h1{font-size:47px;margin-bottom:10px}.hero-sub{font-size:16px}.hero-desc{max-width:290px}.hero-visual{position:absolute;inset:0;opacity:.4}.small-chip{position:relative;right:auto;bottom:auto;width:max-content;margin:0 0 20px 28px}.sections{padding-top:26px}.section-heading h2{font-size:24px}.section-heading p{font-size:11px}.progress-card{padding:7px 9px;min-width:95px}.progress-card b{font-size:17px}.intro-note{padding:14px}.intro-note .drop{width:39px;height:39px;font-size:20px}.cardgrid{gap:11px}.site-card{min-height:260px}.card-image{height:96px}.card-body{padding:14px 12px 12px}.card-name{font-size:19px}.card-verse{font-size:11px}.state-tag{font-size:9px;right:7px}.card-bottom{font-size:11px}.core,.branch{font-size:9px}.scroll-stage{padding:19px 13px}.journey{gap:2px}.journey .journey-step b{font-size:11px}.journey .journey-step span{font-size:9px}.rewards{grid-template-columns:1fr}.reward-graphic{min-height:175px}.modal-inside{padding:24px 18px}.modal-dialog{max-height:94dvh}.modal-inside h2{font-size:25px}.ar-scene{height:260px}.diary-items{grid-template-columns:1fr}.diary-footer{flex-direction:column;align-items:stretch}.footer{padding-bottom:85px}.mapwrap{padding:11px 7px}.map-schematic{min-width:525px}.map-scroll{overflow-x:auto}.section-heading{align-items:center}main{padding-top:13px}.notice{font-size:10px}.intro-stats{justify-content:space-evenly}.diary-items .diary-item{min-height:73px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+
+.lang-switch{border:1px solid #82ac9e;border-radius:20px;background:#e9f4ee;color:#1b5a51;padding:6px 12px;font-size:12px;font-weight:750;letter-spacing:.3px;cursor:pointer;flex-shrink:0}
+.lang-switch:hover{background:#d4e8dd}
+body.english .brand-main{letter-spacing:.1px;font-family:Georgia,serif;font-size:18px}
+body.english .brand-small{font-size:9px;letter-spacing:1.1px}
+body.english .hero h1{letter-spacing:.4px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(39px,5vw,66px)}
+body.english .hero-sub{letter-spacing:.3px;font-size:16px}
+body.english .section-heading h2,body.english .card-name,body.english .scroll-head{letter-spacing:0;font-family:Georgia,'Times New Roman',serif}
+body.english .card-name{font-size:19px;line-height:1.28}
+body.english .journey-step b{font-size:11px;line-height:1.35}
+body.english .brand-mark{font-size:21px}
+body.english .nav button{padding-left:13px;padding-right:13px}
+.work-note{color:#84918a;font-size:11px}
+@media(max-width:575px){.topbar{backdrop-filter:none}.lang-switch{padding:5px 9px;font-size:11px}body.english .brand-main{font-size:14px}body.english .brand-small{font-size:7px}body.english .hero h1{font-size:44px;letter-spacing:0}body.english .hero-sub{font-size:14px}body.english .nav button{font-size:11px;padding:6px 7px}body.english .card-name{font-size:16px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap"><a href="#" class="brand" onclick="event.preventDefault();showPage('discover')"><div class="brand-mark">水</div><div><span class="brand-main">诗随水行</span><span class="brand-small">THE RIVER REMEMBERS</span></div></a><nav class="nav" aria-label="页面导航"><button type="button" class="on" data-nav="discover" onclick="showPage('discover')">探寻</button><button type="button" data-nav="album" onclick="showPage('album')">诗印册</button><button type="button" data-nav="map" onclick="showPage('map')">水脉图</button><button type="button" data-nav="gifts" onclick="showPage('gifts')">礼遇</button></nav><div class="topright"><button type="button" class="lang-switch" id="langSwitch" onclick="changeLang()" aria-label="切换到英文" title="中文 / English">EN</button><span class="pill"><span class="dot"></span>课程概念原型</span><button class="reset-btn" onclick="resetProgress()" title="清空当前收集进度">重置</button></div></div></header>
+<main class="wrap">
+<section class="hero"><div class="hero-copy"><div class="overline">CHU CI · AN IMMERSIVE JOURNEY</div><h1>诗随水行</h1><p class="hero-sub">循水寻诗 · 集印成卷</p><p class="hero-desc">从张家界的山间溪流出发，寻找散落山水间的楚辞记忆。每一滴水，藏着一首诗；每一次探索，让故事继续流传。</p><div class="hero-actions"><button type="button" class="btn primary" onclick="document.getElementById('chapters').scrollIntoView({behavior:'smooth'})">开启寻诗之旅 ↗</button><button type="button" class="btn ghost" onclick="showPage('map')">查看水脉地图</button></div></div><div class="hero-visual"><svg class="stream-art" viewBox="0 0 400 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="riverg" x1="0" x2="1"><stop offset="0" stop-color="#97d2b0" stop-opacity=".06"/><stop offset="1" stop-color="#c5eadb" stop-opacity=".5"/></linearGradient></defs><path d="M420 0 C200 65 328 120 110 173 S270 275 -10 410" fill="none" stroke="url(#riverg)" stroke-width="95" stroke-linecap="round"/><path d="M420 0 C200 65 328 120 110 173 S270 275 -10 410" fill="none" stroke="#e1f5da" stroke-width="1.5" stroke-dasharray="4 9" opacity=".8"/><g fill="#f2dbac" opacity=".8"><circle cx="264" cy="114" r="5"/><circle cx="125" cy="179" r="4"/><circle cx="259" cy="254" r="3"/></g><g fill="none" stroke="#d8f1d7" opacity=".36"><circle cx="264" cy="114" r="15"/><circle cx="125" cy="179" r="12"/><circle cx="259" cy="254" r="9"/></g></svg></div><div class="small-chip"><div class="big"><span id="heroCount">0</span><span style="color:#b4cfc2;font-size:16px"> / 6 枚</span></div><div class="caption">已收入诗卷的水纹诗印</div></div></section>
+
+<div id="discover" class="tabpage active">
+  <section class="sections" id="chapters"><div class="section-heading"><div><div class="eyebrow">CHAPTERS · 六幕诗旅</div><h2>沿水而行，拾起诗歌的记忆</h2><p>选一站开启 AR 场景模拟，解锁诗句、文化讲解与水纹诗印。</p></div><div class="progress-card"><small>收集进度</small><b id="progressNum">0 / 6</b><div class="progress-line"><div id="progressBar" style="width:0%"></div></div></div></div>
+  <div class="intro-row"><div class="intro-note"><div class="drop">◌</div><div><strong>水系相连，不等于生平路线</strong><p>张家界以澧水水系为主轴，湘西通过沅水相关水系延伸，汨罗作为屈原文化终章。各条河流共同联系洞庭湖。</p></div></div><div class="intro-stats"><div><div class="n">4</div><div class="txt">张家界核心章</div></div><div style="width:1px;height:33px;background:#d5c8b4"></div><div><div class="n">2</div><div class="txt">跨区域延伸章</div></div></div></div>
+  <div class="cardgrid" id="cardgrid"></div>
+  <div class="scroll-stage"><h3 class="scroll-head">一卷未完成的诗</h3><p>每一枚水纹代表一次精神探索。集齐诗印后，山水与诗歌将在这里合卷。</p><div class="journey" id="journey"></div></div></section>
+</div>
+<div id="album" class="tabpage"><section class="sections"><div class="section-heading"><div><div class="eyebrow">YOUR COLLECTION</div><h2>楚辞水纹诗印册</h2><p>六枚诗印，六处文化记忆。你走过的章节会留在这幅诗卷里。</p></div><div class="progress-card"><small>已收藏</small><b id="albumCount">0 / 6</b><div class="progress-line"><div id="albumBar" style="width:0%"></div></div></div></div><div class="poem-sheet"><div class="diary-items" id="diary-items"></div><div class="diary-footer"><span style="font-size:12px;color:#71857a" id="album-note">还有六段记忆等待唤醒。</span><button class="btn border" type="button" onclick="window.print()">打印 / 保存诗印册</button></div></div><div class="notice">诗印进度只保存在当前浏览器。清除浏览器数据或使用其他设备可能会丢失。这里的收集、景区扫描和兑换均为课程模拟功能。</div></section></div>
+<div id="map" class="tabpage"><section class="sections"><div class="section-heading"><div><div class="eyebrow">WATERSHED · STORY MAP</div><h2>水向洞庭，诗归山河</h2><p>这是水系关系示意，不是导航地图，也不是屈原真实行迹。</p></div></div><div class="mapwrap"><div style="padding:6px 12px 0"><div class="map-title">洞庭湖水系 · 文化叙事关系</div><div class="map-legend"><span><i class="key"></i>张家界核心区</span><span><i class="key" style="background:#bfa67f"></i>湘西文化延伸</span><span><i class="key" style="background:#8c9eaa"></i>汨罗纪念终章</span></div></div><div class="map-scroll"><svg class="map-schematic" viewBox="0 0 980 510" xmlns="http://www.w3.org/2000/svg" aria-label="张家界澧水水系、湘西沅水水系及汨罗江分别通向洞庭湖的示意图"><defs><linearGradient id="lakeFill" x1="0" x2="1"><stop stop-color="#d6eeea"/><stop offset="1" stop-color="#c4e4e5"/></linearGradient><marker id="arrowmap" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#438e9b" stroke-width="1.3"/></marker></defs><g fill="none" stroke-linecap="round"><path d="M138 123 C238 108 258 189 354 160 S493 182 596 207 S675 214 738 253" stroke="#81bdc0" stroke-width="14"/><path d="M138 123 C238 108 258 189 354 160 S493 182 596 207 S675 214 738 253" stroke="#e5f5ec" stroke-width="4"/><path d="M362 62 C337 81 415 107 396 162" stroke="#81bdc0" stroke-width="8"/><path d="M122 338 C275 293 298 358 464 338 S627 316 750 284" stroke="#81bdc0" stroke-width="12"/><path d="M120 338 C275 293 298 358 464 338 S627 316 750 284" stroke="#e5f5ec" stroke-width="3"/><path d="M900 429 C863 377 858 342 803 318" stroke="#81bdc0" stroke-width="10"/><path d="M900 429 C863 377 858 342 803 318" stroke="#e5f5ec" stroke-width="3"/></g><path d="M768 204 C831 180 897 231 895 284 C907 333 855 369 802 348 C740 370 707 321 723 277 C703 245 726 215 768 204" fill="url(#lakeFill)" stroke="#9dcace" stroke-width="2"/><g font-family="sans-serif" font-size="16" fill="#2c5d5e"><text x="111" y="75" font-size="17" font-weight="bold">张家界 · 澧水流域</text><text x="111" y="292" font-size="17" font-weight="bold" fill="#8b775b">湘西 · 沅水相关水系</text><text x="759" y="256" font-size="24" font-weight="bold">洞庭湖</text><text x="780" y="279" font-size="12">水文汇聚</text><text x="854" y="455" font-size="18" font-weight="bold" fill="#6c7d88">汨罗江</text><text x="155" y="103" font-size="13">桑植</text><text x="253" y="127" font-size="13">永定 · 澧水</text><text x="435" y="145" font-size="13">慈利</text><text x="531" y="189" font-size="13">澧水向东</text><text x="325" y="48" font-size="12">武陵源·索溪—溇水</text><text x="130" y="369" font-size="13">矮寨·德夯</text><text x="293" y="375" font-size="13">峒河 / 武水</text><text x="490" y="360" font-size="13">沅水</text><text x="832" y="476" font-size="12" fill="#8a9091">屈原纪念地</text></g><g fill="#2b7777"><circle cx="138" cy="123" r="5"/><circle cx="354" cy="160" r="5"/><circle cx="520" cy="180" r="5"/><circle cx="120" cy="338" r="5"/><circle cx="900" cy="429" r="5"/></g><g font-size="11" fill="#8b9b9b"><text x="108" y="228">（示意：不同河流不是同一条河道）</text><text x="566" y="427">汨罗江由东南方向汇入洞庭湖</text></g><path d="M650 458 C713 453 758 410 785 353" fill="none" stroke="#a6b4ae" stroke-width="1.7" stroke-dasharray="5 6"/><text x="115" y="454" font-size="13" fill="#68817b">文学主线：问天 → 初志 → 寻芳 → 神游 → 求索 → 怀沙</text></svg></div><p class="map-prompt">地理关系示意：张家界的澧水水系、湘西关联的沅水水系以及汨罗江分别与洞庭湖相连。文化旅程按情绪组织章节，不能理解为沿同一河道直接抵达所有节点。</p></div><div class="route-how"><div class="mini"><b>01 · 山水载诗</b><p>张家界四枚核心诗印承载立志、寻芳、神游与求索，突出天门山、武陵源、慈利等资源。</p></div><div class="mini"><b>02 · 两水相望</b><p>《湘夫人》的“沅”“澧”成为文学连接；湘西矮寨以《天问》开启文化序章。</p></div><div class="mini"><b>03 · 归于诗魂</b><p>洞庭湖提供水文汇聚意象，汨罗章回望屈原生命终章。历史行迹与现代叙事应严格区分。</p></div></div></section></div>
+<div id="gifts" class="tabpage"><section class="sections"><div class="section-heading"><div><div class="eyebrow">REWARDS · 纪念礼遇</div><h2>把一段诗，寄往更远的地方</h2><p>完成四枚张家界核心诗印，或集齐六章，解锁不同纪念礼遇演示。</p></div></div><div class="rewards"><div class="reward-box"><div class="reward-graphic"><div class="postcard"><svg viewBox="0 0 200 126"><rect width="200" height="126" fill="#f8f6ed"/><path d="M-15 102 Q35 70 80 89 T210 42" stroke="#629c92" stroke-width="24" fill="none" opacity=".55"/><path d="M-10 103 Q39 74 80 89 T210 42" stroke="#d8e9df" stroke-width="4" fill="none"/><path d="M15 30 L43 11 L64 31 L84 13 L121 44" stroke="#aec7b2" stroke-width="2" fill="none"/><text x="16" y="66" fill="#496c5a" font-size="17" font-family="serif">诗随水行</text><text x="16" y="81" fill="#899d8b" font-size="8">THE RIVER REMEMBERS</text></svg><div class="postmark">楚辞<br>邮记<br>· 样品 ·</div></div></div><div class="reward-content"><div class="reward-label">ZHANGJIAJIE · 4 STAMPS</div><h3>山水诗行 · 纪念明信片</h3><p>收集张家界四枚核心诗印，模拟获得带个人诗卷编号的限定明信片。</p><button type="button" class="btn dark" id="claim4" onclick="claimGift(4)" disabled>尚未满足条件 · 0/4</button></div></div><div class="reward-box"><div class="reward-graphic sand"><div class="bookmark"><span class="vertical">诗随水行</span></div></div><div class="reward-content"><div class="reward-label">COMPLETE JOURNEY · 6 STAMPS</div><h3>江河合卷 · 水脉书签</h3><p>集齐全部六枚水纹诗印，模拟获得叠层水脉书签和完整数字诗卷。</p><button type="button" class="btn dark" id="claim6" onclick="claimGift(6)" disabled>尚未满足条件 · 0/6</button></div></div></div><div class="notice">礼品和兑换码均为演示内容，不涉及景区授权、真实库存或邮寄服务。本网页不会收集联系方式或处理支付。</div></section></div>
+</main>
+<footer class="footer wrap"><span><b>诗随水行</b>　楚辞水脉 · 沉浸式文旅体验概念原型</span><span>课堂展示版 · 非官方景区应用 / 非真实 AR 识别</span></footer>
+<div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-label="诗歌场景"><div class="modal-dialog"><button type="button" class="modal-close" onclick="closeModal()" aria-label="关闭">×</button><div id="modalContent" class="modal-inside"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+const spots=[
+ {id:'wen',chapter:'问天',site:'湘西 · 矮寨天问台',area:'湘西文化延伸',poem:'《天问》',verse:'遂古之初，谁传道之？',note:'从《天问》的连续追问认识屈原的神话想象。天问台与屈原的联系属于地方传说，不应当作已证实的创作地点。',scene:'问天星纹',glyph:'✧',color:'linear-gradient(145deg,#44687e,#779aa5)',core:false,tip:'对准想象中的夜空，星点会化作第一枚水纹。'},
+ {id:'zhi',chapter:'初志',site:'张家界 · 天门山',area:'张家界核心区',poem:'《离骚》',verse:'乘骐骥以驰骋兮，来吾道夫先路！',note:'从天门山的登高远眺，进入《离骚》中“先路”的志向意象。此处是当代景观与文学主题的对应，不代表诗人在此登临。',scene:'云途初志',glyph:'↗',color:'linear-gradient(145deg,#527b7a,#91b7a9)',core:true,tip:'云间出现一条延向远方的虚拟水路，象征人生前路。'},
+ {id:'fang',chapter:'寻芳',site:'张家界 · 金鞭溪 / 水绕四门',area:'张家界核心区',poem:'《九歌·湘夫人》',verse:'沅有芷兮澧有兰，思公子兮未敢言。',note:'诗句中的“沅”“澧”连接两个真实水系。通过虚拟香草认识楚辞意象，现场不一定有诗中同种植物。',scene:'兰芷芳纹',glyph:'✿',color:'linear-gradient(145deg,#628a65,#9bb990)',core:true,tip:'在溪流上方唤醒一株虚拟兰芷，收集香草的文化记忆。'},
+ {id:'shen',chapter:'神游',site:'张家界 · 慈利九歌·山鬼',area:'张家界核心区',poem:'《九歌·山鬼》',verse:'若有人兮山之阿，被薜荔兮带女萝。',note:'山鬼形象与楚辞神话、山林草木紧密相连。景区曾进行沉浸式演绎，当前实际开放情况需另行核实。',scene:'山林神纹',glyph:'◇',color:'linear-gradient(145deg,#47756e,#83a99b)',core:true,tip:'山林间浮现虚拟藤蔓与神灵剪影，进入楚辞神话世界。'},
+ {id:'suo',chapter:'求索',site:'张家界 · 大峡谷（概念支线）',area:'张家界核心区',poem:'《离骚》',verse:'路曼曼其修远兮，吾将上下而求索。',note:'峡谷探寻与《离骚》的求索精神形成体验上的隐喻。这里是提议中的文旅设计，不是屈原活动史实。',scene:'求索足纹',glyph:'∞',color:'linear-gradient(145deg,#837da1,#b3a9c4)',core:true,tip:'循着数字足迹完成一段象征性探寻，获得求索诗印。'},
+ {id:'sha',chapter:'怀沙',site:'岳阳 · 汨罗屈原纪念地',area:'文化终章',poem:'《九章·怀沙》',verse:'知死不可让，愿勿爱兮。',note:'传统纪念叙事以汨罗江为屈原生命终章。汨罗江与澧水分别汇入洞庭湖，并非沿同一条河顺流到达。',scene:'怀沙江纹',glyph:'◌',color:'linear-gradient(145deg,#a08770,#d5b5a1)',core:false,tip:'水纹渐渐平静，六章诗歌故事在这里完成精神收束。'}
+];
+const spotEnglish={
+ "wen": {
+  "chapter": "Questions to Heaven",
+  "short": "Questions",
+  "site": "Xiangxi · Tianwen Terrace, Aizhai",
+  "area": "Xiangxi · Cultural Extension",
+  "poem": "Tian Wen (Heavenly Questions)",
+  "verse": "At the dawn of time, who first told the story of the world?",
+  "note": "At Tianwen Terrace, explore the ancient myths and questions raised in Tian Wen. The terrace’s association with Qu Yuan comes from local tradition, not verified history.",
+  "scene": "Stars of Inquiry",
+  "tip": "Look toward an imaginary night sky as stars gather to form your first water-pattern stamp."
+ },
+ "zhi": {
+  "chapter": "Aspiration",
+  "short": "Aspiration",
+  "site": "Zhangjiajie · Tianmen Mountain",
+  "area": "Zhangjiajie · Core Area",
+  "poem": "Li Sao",
+  "verse": "I shall ride a fine steed onward and lead the way.",
+  "note": "From the heights of Tianmen Mountain, discover the spirit of aspiration in Li Sao. This is a symbolic link between landscape and literature, not evidence that Qu Yuan visited the mountain.",
+  "scene": "Path Through the Clouds",
+  "tip": "A virtual waterway appears among the clouds, symbolizing the road ahead."
+ },
+ "fang": {
+  "chapter": "Seeking Fragrant Herbs",
+  "short": "Fragrant Herbs",
+  "site": "Zhangjiajie · Golden Whip Stream / Shuirao Simen",
+  "area": "Zhangjiajie · Core Area",
+  "poem": "Jiu Ge · Xiang Furen",
+  "verse": "Fragrant herbs grow by the Yuan River, and orchids bloom by the Li River. I long for you, yet dare not speak.",
+  "note": "The Yuan and Li rivers named in this poem connect literature with real river basins. Collect virtual fragrant herbs and learn their symbolic meaning. The same plants are not necessarily found at this location.",
+  "scene": "Fragrant Herbs",
+  "tip": "Discover virtual herbs above the stream and collect their cultural story."
+ },
+ "shen": {
+  "chapter": "Realm of Spirits",
+  "short": "Spirits",
+  "site": "Zhangjiajie · Jiu Ge: Shan Gui, Cili",
+  "area": "Zhangjiajie · Core Area",
+  "poem": "Jiu Ge · Shan Gui",
+  "verse": "In a mountain hollow, a figure appears, clothed in leafy vines and girdled with trailing creepers.",
+  "note": "Enter the mythical world of Shan Gui (Mountain Spirit). Vines and forest imagery bring its world to life. The current operating status of the themed attraction has not been verified.",
+  "scene": "Mountain Spirit",
+  "tip": "Virtual vines and the silhouette of a mountain spirit emerge in the forest."
+ },
+ "suo": {
+  "chapter": "The Quest",
+  "short": "Quest",
+  "site": "Zhangjiajie · Grand Canyon (proposed side quest)",
+  "area": "Zhangjiajie · Concept Route",
+  "poem": "Li Sao",
+  "verse": "The journey ahead is long; I will keep searching, high and low.",
+  "note": "The winding paths of the canyon offer a metaphor for Qu Yuan’s pursuit of truth and ideals. This is a proposed literary experience, not a historical reconstruction.",
+  "scene": "Steps of the Quest",
+  "tip": "Follow imagined digital footprints to collect a stamp representing the spirit of inquiry."
+ },
+ "sha": {
+  "chapter": "Remembering Qu Yuan",
+  "short": "Remembrance",
+  "site": "Yueyang · Qu Yuan Memorial Sites, Miluo",
+  "area": "Cultural Finale",
+  "poem": "Jiu Zhang · Huai Sha",
+  "verse": "Knowing that death cannot be avoided, I will not cling to life.",
+  "note": "At the Miluo River, reflect on Qu Yuan’s life and later generations’ remembrance of him. The Miluo and Li rivers flow separately into Dongting Lake; this is not one continuous downstream route.",
+  "scene": "Memory of the River",
+  "tip": "The flowing patterns settle as the six chapters reach their thoughtful conclusion."
+ }
+};
+const textEnglish={
+ "诗随水行 · 楚辞水脉互动体验": "Poetry in Flow · An Interactive Chu Ci Journey",
+ "诗随水行": "Poetry in Flow",
+ "THE RIVER REMEMBERS": "POETRY IN FLOW",
+ "探寻": "Explore",
+ "诗印册": "Collection",
+ "水脉图": "River Map",
+ "礼遇": "Rewards",
+ "课程概念原型": "Student Project · Prototype",
+ "重置": "Reset",
+ "CHU CI · AN IMMERSIVE JOURNEY": "CHU CI · AN INTERACTIVE JOURNEY",
+ "循水寻诗 · 集印成卷": "Follow the Rivers. Discover the Poems. Complete Your Scroll.",
+ "从张家界的山间溪流出发，寻找散落山水间的楚辞记忆。每一滴水，藏着一首诗；每一次探索，让故事继续流传。": "Begin your journey among the mountain streams of Zhangjiajie and discover the poetry of Chu Ci woven into the landscape. Every stream carries a story, and every discovery brings an ancient verse to life.",
+ "开启寻诗之旅 ↗": "Start Exploring ↗",
+ "查看水脉地图": "Explore the River Map",
+ "/ 6 枚": "/ 6 Stamps",
+ "已收入诗卷的水纹诗印": "Poetry Stamps added to your scroll",
+ "CHAPTERS · 六幕诗旅": "SIX CHAPTERS · YOUR JOURNEY",
+ "沿水而行，拾起诗歌的记忆": "Follow the Rivers, Collect the Stories",
+ "选一站开启 AR 场景模拟，解锁诗句、文化讲解与水纹诗印。": "Choose a destination, explore its poetry and cultural stories, and collect a unique Poetry Stamp through an interactive AR preview.",
+ "收集进度": "Your progress",
+ "水系相连，不等于生平路线": "Connected by Rivers, Not by a Historical Route",
+ "张家界以澧水水系为主轴，湘西通过沅水相关水系延伸，汨罗作为屈原文化终章。各条河流共同联系洞庭湖。": "Zhangjiajie is linked to the Li River basin, while the Yuan River connects the Xiangxi extension. Miluo forms the final chapter of the cultural story. These rivers are connected through Dongting Lake, not one continuous route.",
+ "张家界核心章": "Core Zhangjiajie chapters",
+ "跨区域延伸章": "Regional extension chapters",
+ "一卷未完成的诗": "An Unfinished Scroll",
+ "每一枚水纹代表一次精神探索。集齐诗印后，山水与诗歌将在这里合卷。": "Each stamp marks a discovery. Collect them all to complete your journey through rivers, landscapes, and poetry.",
+ "楚辞水纹诗印册": "My Poetry Stamp Collection",
+ "六枚诗印，六处文化记忆。你走过的章节会留在这幅诗卷里。": "Six stamps, six cultural stories. Every chapter you explore becomes part of your scroll.",
+ "已收藏": "Collected",
+ "还有六段记忆等待唤醒。": "Six more stories to discover.",
+ "打印 / 保存诗印册": "Print / Save Collection",
+ "诗印进度只保存在当前浏览器。清除浏览器数据或使用其他设备可能会丢失。这里的收集、景区扫描和兑换均为课程模拟功能。": "Your progress is stored only in this browser. Clearing browser data or switching devices may erase it. Collecting stamps, scanning locations, and redeeming rewards are demonstration features.",
+ "水向洞庭，诗归山河": "Rivers Meet at Dongting, Stories Live On",
+ "这是水系关系示意，不是导航地图，也不是屈原真实行迹。": "This is a schematic of river connections, not a navigation map or Qu Yuan’s actual travel route.",
+ "洞庭湖水系 · 文化叙事关系": "Dongting Lake Basin · Cultural Story Map",
+ "张家界核心区": "Zhangjiajie Core Area",
+ "湘西文化延伸": "Xiangxi Cultural Extension",
+ "汨罗纪念终章": "Miluo · Final Chapter",
+ "张家界 · 澧水流域": "Zhangjiajie · Li River Basin",
+ "湘西 · 沅水相关水系": "Xiangxi · Yuan River Basin",
+ "洞庭湖": "Dongting Lake",
+ "水文汇聚": "Watershed Junction",
+ "汨罗江": "Miluo River",
+ "桑植": "Sangzhi",
+ "永定 · 澧水": "Yongding · Li River",
+ "慈利": "Cili",
+ "澧水向东": "Li River → East",
+ "武陵源·索溪—溇水": "Wulingyuan · Suoxi / Lou River",
+ "矮寨·德夯": "Aizhai · Dehang",
+ "峒河 / 武水": "Dong / Wu Rivers",
+ "沅水": "Yuan River",
+ "屈原纪念地": "Qu Yuan Memorial Sites",
+ "（示意：不同河流不是同一条河道）": "Schematic: These are separate rivers",
+ "汨罗江由东南方向汇入洞庭湖": "The Miluo River also flows into Dongting Lake",
+ "文学主线：问天 → 初志 → 寻芳 → 神游 → 求索 → 怀沙": "Story chapters: Questions → Aspiration → Herbs → Spirits → Quest → Remembrance",
+ "地理关系示意：张家界的澧水水系、湘西关联的沅水水系以及汨罗江分别与洞庭湖相连。文化旅程按情绪组织章节，不能理解为沿同一河道直接抵达所有节点。": "River connections shown schematically: The Li River basin around Zhangjiajie, the Yuan River basin associated with Xiangxi, and the Miluo River all connect to Dongting Lake. Our chapters follow a literary narrative, not a continuous boat journey.",
+ "01 · 山水载诗": "01 · Poetry in Landscapes",
+ "张家界四枚核心诗印承载立志、寻芳、神游与求索，突出天门山、武陵源、慈利等资源。": "Four core stamps explore aspiration, fragrant herbs, mountain spirits, and the quest for ideals through Zhangjiajie landscapes.",
+ "02 · 两水相望": "02 · Two Rivers, One Verse",
+ "《湘夫人》的“沅”“澧”成为文学连接；湘西矮寨以《天问》开启文化序章。": "The Yuan and Li rivers appear together in Xiang Furen. The cultural extension at Aizhai begins with Tian Wen.",
+ "03 · 归于诗魂": "03 · A Legacy Remembered",
+ "洞庭湖提供水文汇聚意象，汨罗章回望屈原生命终章。历史行迹与现代叙事应严格区分。": "Dongting Lake brings the river systems together; Miluo invites reflection on Qu Yuan’s legacy. This modern narrative is not a historical itinerary.",
+ "REWARDS · 纪念礼遇": "REWARDS · SOUVENIRS",
+ "把一段诗，寄往更远的地方": "Send a Poem Beyond the Mountains",
+ "完成四枚张家界核心诗印，或集齐六章，解锁不同纪念礼遇演示。": "Collect the four Zhangjiajie core stamps or all six chapters to unlock a souvenir redemption preview.",
+ "楚辞": "Chu Ci",
+ "邮记": "Postmark",
+ "· 样品 ·": "· SAMPLE ·",
+ "山水诗行 · 纪念明信片": "Poetry Journey Postcard",
+ "收集张家界四枚核心诗印，模拟获得带个人诗卷编号的限定明信片。": "Collect the four Zhangjiajie core stamps to preview a commemorative postcard with a personal scroll code.",
+ "江河合卷 · 水脉书签": "River Journey Bookmark",
+ "集齐全部六枚水纹诗印，模拟获得叠层水脉书签和完整数字诗卷。": "Collect all six Poetry Stamps to preview a layered river-map bookmark and complete digital scroll.",
+ "礼品和兑换码均为演示内容，不涉及景区授权、真实库存或邮寄服务。本网页不会收集联系方式或处理支付。": "All rewards and redemption codes are fictional demonstrations. No attraction authorization, real inventory, or mailing service is provided. This site does not collect contact details or process payments.",
+ "楚辞水脉 · 沉浸式文旅体验概念原型": "Chu Ci River Journey · Interactive Cultural Tourism Concept",
+ "课堂展示版 · 非官方景区应用 / 非真实 AR 识别": "Student demonstration · Not an official attraction app · No real AR recognition"
+};
+const textChinese=Object.fromEntries(Object.entries(textEnglish).map(([a,b])=>[b,a]));
+const KEY='chuci-water-demo-v1', LANG_KEY='chuci-water-lang-v1';
+let owned=[], current=null, cameraStream=null, toastTimer=null, lang='zh';
+try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(v))owned=[...new Set(v.filter(id=>spots.some(s=>s.id===id)))];}catch(e){}
+try{if(localStorage.getItem(LANG_KEY)==='en')lang='en';}catch(e){}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L=(zh,en)=>lang==='en'?en:zh;
+const S=(s,k)=>lang==='en'?(spotEnglish[s.id][k]??s[k]):s[k];
+const originalTexts=new WeakMap();
+function translateStatic(){
+ const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let node;
+ while((node=walk.nextNode())){
+  if(!node.parentElement||node.parentElement.closest('script,style'))continue;
+  const raw=node.nodeValue.trim();if(!raw)continue;
+  if(!originalTexts.has(node)&&Object.prototype.hasOwnProperty.call(textEnglish,raw))originalTexts.set(node,raw);
+  const original=originalTexts.get(node);if(!original)continue;
+  const desired=lang==='en'?textEnglish[original]:original;
+  node.nodeValue=node.nodeValue.replace(node.nodeValue.trim(),desired);
+ }
+ document.documentElement.lang=lang==='en'?'en':'zh-CN';
+ document.body.classList.toggle('english',lang==='en');
+ document.getElementById('langSwitch').textContent=lang==='en'?'中文':'EN';
+ document.getElementById('langSwitch').setAttribute('aria-label',L('切换到英文','Switch to Chinese'));
+ document.title=L('诗随水行 · 楚辞水脉互动体验','Poetry in Flow · An Interactive Chu Ci Journey');
+ document.querySelector('.reset-btn').title=L('清空当前收集进度','Clear your saved collection');
+}
+function changeLang(){lang=lang==='zh'?'en':'zh';try{localStorage.setItem(LANG_KEY,lang)}catch(e){};render();if(document.getElementById('detailModal').classList.contains('open')){if(current)openSpot(current.id);else closeModal()}translateStatic()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(owned))}catch(e){}}
+function inform(zh,en){const el=document.getElementById('toast');el.textContent=L(zh,en||zh);el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2500)}
+function showPage(page){document.querySelectorAll('.tabpage').forEach(el=>el.classList.toggle('active',el.id===page));document.querySelectorAll('[data-nav]').forEach(el=>el.classList.toggle('on',el.dataset.nav===page));window.scrollTo({top:0,behavior:'smooth'})}
+function render(){
+ const count=owned.length, core=spots.filter(s=>s.core&&owned.includes(s.id)).length;
+ document.getElementById('heroCount').textContent=count;
+ document.getElementById('progressNum').textContent=`${count} / 6`;
+ document.getElementById('progressBar').style.width=(count/6*100)+'%';
+ document.getElementById('albumCount').textContent=`${count} / 6`;
+ document.getElementById('albumBar').style.width=(count/6*100)+'%';
+ document.getElementById('cardgrid').innerHTML=spots.map((s,i)=>`<article class="site-card"><div class="card-image" style="--bg:${s.color}"><span class="num">CHAPTER ${String(i+1).padStart(2,'0')}</span><span class="glyph">${s.glyph}</span><span class="state-tag ${owned.includes(s.id)?'done':''}">${owned.includes(s.id)?L('✓ 已收藏','✓ Collected'):L('○ 待探索','○ Not yet explored')}</span></div><div class="card-body"><div class="card-topline"><span class="card-region">${esc(S(s,'area'))}</span><span class="${s.core?'core':'branch'}">${s.core?L('核心站','Core Stop'):L('延伸站','Extension')}</span></div><div class="card-name">${esc(S(s,'chapter'))}</div><div class="card-verse">${esc(lang==='en'?S(s,'verse'):s.verse)}</div><div class="card-bottom"><span>${esc(S(s,'site'))}</span><button type="button" style="border:0;background:none;padding:0;color:#9d774a;font-weight:700" onclick="openSpot('${s.id}')" aria-label="${esc(L('探索','Explore')+' '+S(s,'chapter'))}">${L('探索','Explore')} <span class="arrow">↗</span></button></div></div></article>`).join('');
+ document.getElementById('journey').innerHTML=spots.map(s=>`<div class="journey-step ${owned.includes(s.id)?'done':''}"><div class="circle"></div><b>${esc(S(s,'short')||S(s,'chapter'))}</b><span>${owned.includes(s.id)?L('记忆已解锁','Unlocked'):L('等待解锁','Locked')}</span></div>`).join('');
+ document.getElementById('diary-items').innerHTML=spots.map(s=>`<div class="diary-item"><div class="stamp ${owned.includes(s.id)?'':'off'}">${owned.includes(s.id)?s.glyph:'?'}</div><div><strong>${esc(S(s,'chapter'))} · ${esc(owned.includes(s.id)?S(s,'scene'):L('尚未解锁','Not yet unlocked'))}</strong><p>${esc(owned.includes(s.id)?(lang==='en'?S(s,'verse'):s.verse):L('探索','Explore ')+S(s,'site')+L('，唤醒这段记忆',' to discover this story'))}</p></div></div>`).join('');
+ document.getElementById('album-note').textContent=count===6?L('六枚诗印已集齐，江河合卷。','All six stamps collected. Your scroll is complete.'):
+ L(`还有 ${6-count} 段楚辞记忆等待唤醒。`,`${6-count} more ${6-count===1?'story':'stories'} to discover.`);
+ for(const n of [4,6]){const el=document.getElementById('claim'+n),can=n===4?core===4:count===6;el.disabled=!can;el.textContent=can?(n===4?L('查看明信片兑换演示 ↗','Preview Postcard Redemption ↗'):L('查看书签兑换演示 ↗','Preview Bookmark Redemption ↗')):L(`尚未满足条件 · ${n===4?core:count}/${n}`,`Not yet unlocked · ${n===4?core:count}/${n}`)}
+ translateStatic();
+}
+function setModal(markup){document.getElementById('modalContent').innerHTML=markup;document.getElementById('detailModal').classList.add('open');document.body.classList.add('modal-open')}
+function verseBlock(s){return lang==='en'?`<div class="verse-block">${esc(S(s,'verse'))}</div><p class="translation">${esc(s.verse)}<br><span class="work-note">English verses adapted for tourism use; not quotations from a published translation.</span></p>`:`<div class="verse-block">${esc(s.verse)}</div><p class="translation">EN · 旅游导览工作译文（非引用权威译本）<br>${esc(S_EN(s,'verse'))}</p>`}
+function S_EN(s,k){return spotEnglish[s.id][k]??s[k]}
+function openSpot(id){stopCamera();current=spots.find(s=>s.id===id);if(!current)return;const s=current;
+ setModal(`<div class="modal-label">${esc(S(s,'area'))} · ${esc(S(s,'poem'))}</div><h2>${esc(S(s,'chapter'))} <span style="font-size:14px;color:#8c998e;font-family:sans-serif">${esc(S(s,'scene'))}</span></h2><p class="place">${esc(S(s,'site'))}</p>${verseBlock(s)}<div class="culture">${esc(S(s,'note'))}</div><div class="modal-actions"><button type="button" class="btn dark" onclick="enterAR()">${L('开启 AR 场景模拟 →','Enter AR Preview →')}</button><button type="button" class="btn border" onclick="collectCurrent()">${owned.includes(s.id)?L('已收藏 · 再次回顾','Collected · Revisit'):L('跳过场景，直接模拟收集','Skip Preview · Collect Stamp')}</button></div><p class="ar-note">${L('演示版不需要到景区。实际产品可以把解锁与经授权的景区二维码或 AR 标识绑定。','No visit is required for this demo. A future version could link each stamp to an authorized on-site QR code or AR marker.')}</p>`)}
+function stopCamera(){if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null}}
+async function startCamera(){const v=document.getElementById('camera-video');if(!v)return;if(!navigator.mediaDevices?.getUserMedia){inform('当前环境不支持摄像头，已保留动画模式','Camera access is unavailable. Animation preview remains accessible.');return}try{cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});if(!document.getElementById('camera-video')){stopCamera();return}v.srcObject=cameraStream;await v.play();inform('摄像头已开启 · 诗纹为模拟叠加效果','Camera enabled. The visual overlay is a simulation.')}catch(e){inform('未开启摄像头，仍可使用模拟 AR 场景','Camera unavailable. The AR-style preview still works.')}}
+function enterAR(){const s=current;if(!s)return;
+ setModal(`<div class="modal-label">AR PREVIEW · ${L('诗纹唤醒','DISCOVER A POETRY STAMP')}</div><h2>${esc(S(s,'chapter'))} · ${esc(S(s,'scene'))}</h2><p class="place">${esc(S(s,'site'))}</p><div class="ar-scene" id="ar-scene"><video id="camera-video" playsinline autoplay muted></video><div class="scanline"></div><div class="ar-corner">◎ SCANNING · DEMO</div><div class="ar-glyph">${s.glyph}</div><div class="ar-bottom">${esc(S(s,'tip'))}</div></div>${verseBlock(s)}<div class="modal-actions"><button type="button" class="btn border" onclick="startCamera()">◎ ${L('尝试打开手机镜头','Try Camera Mode')}</button><button type="button" class="btn primary" onclick="collectCurrent()">${owned.includes(s.id)?L('已收藏 · 再次回顾','Collected · Revisit'):L('收集这枚水纹诗印 ✦','Collect This Poetry Stamp ✦')}</button></div><p class="ar-note">${L('这是视觉特效演示，并非真实图像识别。打开摄像头需浏览器支持及授权，未授权仍可体验。','This is an AR-style visual preview, not real image recognition. Camera access requires browser support and permission; it is optional.')}</p>`)}
+function collectCurrent(){if(!current)return;const wasNew=!owned.includes(current.id);if(wasNew){owned.push(current.id);save()}stopCamera();render();if(wasNew){if(owned.length===6)inform('六章已圆满，前往礼遇页解锁完整诗卷！','All six chapters complete! Visit Rewards to see your souvenir preview.');else if(spots.filter(s=>s.core&&owned.includes(s.id)).length===4)inform('张家界四枚已集齐！纪念明信片已解锁。','All four Zhangjiajie core stamps collected! Your postcard is unlocked.');else inform('诗印已收入你的水脉长卷。','Poetry Stamp added to your scroll.')}else inform('这段记忆已在诗卷里。','You have already collected this stamp.');closeModal();showPage('album')}
+function closeModal(){stopCamera();document.getElementById('detailModal').classList.remove('open');document.body.classList.remove('modal-open')}
+document.getElementById('detailModal').addEventListener('click',e=>{if(e.target.id==='detailModal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function claimGift(n){const enough=n===4?spots.filter(s=>s.core&&owned.includes(s.id)).length===4:owned.length===6;if(!enough){inform('还需要集齐对应诗印','Collect the required stamps first.');return}const title=n===4?L('山水诗行 · 纪念明信片','Poetry Journey Postcard'):L('江河合卷 · 水脉书签','River Journey Bookmark');const code=`DEMO-CHUCI-${n}-${spots.reduce((a,s)=>a+(owned.includes(s.id)?s.id.charCodeAt(0):0),0)}`;
+ setModal(`<div class="modal-label">REWARD UNLOCKED · ${L('概念兑奖','REDEMPTION PREVIEW')}</div><h2>${title}</h2><p class="place">${n===4?L('恭喜完成张家界四站诗旅体验','You completed all four Zhangjiajie core stops.'):L('恭喜完成全部六章诗旅体验','You completed all six chapters.')}</p><div class="gift-claim"><div style="font-family:serif;font-size:33px;color:#b39668">✧</div><div style="font-family:serif;font-size:20px;color:#335c53">${L('循水寻诗，集印成卷','Follow the Rivers. Complete Your Scroll.')}</div><p style="font-size:12px;color:#8b8779">${L('演示凭证编号（不可在真实景区使用）','Sample code (not valid at real attractions)')}</p><div class="code">${code}</div></div><div class="modal-actions"><button class="btn dark" onclick="copyCode('${code}')">${L('复制演示编号','Copy Sample Code')}</button><button class="btn border" onclick="closeModal();showPage('album')">${L('返回我的诗印册','Back to My Collection')}</button></div><p class="ar-note">${L('这是可行性方案的交互预览：明信片、书签、邮寄与景区兑换均尚未接入真实服务。','Concept demonstration only: postcards, bookmarks, mailing, and in-person redemption are not available services.')}</p>`)}
+function copyCode(s){if(navigator.clipboard?.writeText){navigator.clipboard.writeText(s).then(()=>inform('演示编号已复制','Sample code copied.')).catch(()=>inform('请手动复制编号','Please copy the code manually.'))}else inform('请手动复制演示编号','Please copy the sample code manually.')}
+function resetProgress(){if(!confirm(L('要清空当前浏览器的六枚诗印收集进度吗？','Clear all six Poetry Stamps from this browser?')))return;owned=[];save();render();inform('已重置模拟收集进度','Demo collection reset.');showPage('discover')}
+render();
+</script>
+</body></html>
